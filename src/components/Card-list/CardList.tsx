@@ -25,12 +25,12 @@ function CardList() {
   useEffect(() => {
     if (getPosition && getPosition !== position) {
       setPosition(getPosition);
-      if (cities?.length === 0 && typeof getPosition !== "string") {
+      if (cities?.length !== 0 && typeof getPosition !== "string") {
         dispatch(fetchWeather(getPosition.lat, getPosition.lon));
         dispatch(citiesAdd(getPosition.lat, getPosition.lon));
       }
       // если доступ к геоданным нет, то брянская область по умолчанию
-      if (cities?.length === 0 && typeof getPosition === "string") {
+      if (cities?.length !== 0 && typeof getPosition === "string") {
         dispatch(fetchWeather(53.2423778, 34.3668288));
         dispatch(citiesAdd(53.2423778, 34.3668288));
       }
