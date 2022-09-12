@@ -55,7 +55,7 @@ function CardList() {
   // варианты городов по запросу
   const fetchCities = async () => {
     const responseCities = await fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${searchValue}&limit=5&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
+      `https://api.openweathermap.org/geo/1.0/direct?q=${searchValue}&limit=5&appid=${process.env.REACT_APP_WEATHER_API_KEY}`
     );
     if (responseCities.ok) {
       let citiesArr = await responseCities.json();
