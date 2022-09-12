@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import CardList from "./components/Card-list/CardList";
+import "./App.css";
+import { useAppDispatch, useTypedSelector } from "./hooks/redux";
+import { fetchWeather } from "./store/weather/weatherAction";
 
 function App() {
+  const { cities } = useTypedSelector((state) => state.weatherReducer);
+  const dispatch = useAppDispatch();
+  // отображение погоды сохранённых в прошлой сессии городов
+  useEffect(() => {
+    cities?.forEach((citi) => {
+      dispatch(fetchWeather(citi.lat, citi.lon));
+    });
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <CardList />
     </div>
   );
 }
